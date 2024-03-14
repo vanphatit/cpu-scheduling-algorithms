@@ -141,7 +141,7 @@ namespace CPU_SCHEDULING_ALGORITHMS
                         }
                         if (col == 2)
                         {
-                            process[i++].burst_time = int.Parse(dataGridView1.Rows[row].Cells[col].Value.ToString());
+                            process[i++].burst_time = process[i].remaining_time = int.Parse(dataGridView1.Rows[row].Cells[col].Value.ToString());
                         }
                 }
             }
@@ -258,6 +258,40 @@ namespace CPU_SCHEDULING_ALGORITHMS
                 }
             }
         }
+
+        //sort Process by arrival time
+        public static void sortArrivalTime(Process[] a, int n)
+        {
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (a[i].arrival_time > a[j].arrival_time)
+                    {
+                        swap(ref a[i], ref a[j]);
+                    }
+                }
+            }
+        }
+
+        //sort Process by burst time
+        public static void sortBurstTime(Process[] a, int n, int[] x)
+        {
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (a[i].burst_time > a[j].burst_time)
+                    {
+                        swap(ref a[i], ref a[j]);
+                    }
+                }
+            }
+
+            for (int i = 0; i < n; i++)
+                x[i] = a[i].burst_time;
+        }
+
         public void SJF(Process[] a, int n)
         {
             Random rand = new Random();
@@ -387,7 +421,7 @@ namespace CPU_SCHEDULING_ALGORITHMS
         public void SRTF(Process[] a, int n)
         {
             Random rand = new Random();
-            int[] processGantt = new int[100];
+            Process[] processGantt = new Process[100];
             RGB[] colorStandar = new RGB[100];
             RGB[] colorProcess = new RGB[100];
             int xx, yy, zz;
@@ -409,23 +443,25 @@ namespace CPU_SCHEDULING_ALGORITHMS
                 colorStandar[i].z = zz;
             }
 
+            sortArrivalTime(a, n);
             for (i = 0; i < n; i++)
                 x[i] = a[i].burst_time;
+
             //---------------------------
             //Calulating..
-            x[9] = 9999; //Declare Max
+            x[n+1] = 9999; //Declare Max
+            Process currentProcessRunning;
             for (time = 0; count != n; time++)
             {
-                smallest = 9;
+                smallest = n+1;
                 for (i = 0; i < n; i++)
                 {
                     if (a[i].arrival_time <= time && x[i] < x[smallest] && x[i] > 0)
                     {
-                        processGantt[time] = i;
+                        processGantt[time] = a[i];
                         colorProcess[time] = colorStandar[i];
                         smallest = i;
-                    }   
-
+                    }
                 }
                 x[smallest]--;
                 if (x[smallest] == 0)
@@ -435,6 +471,8 @@ namespace CPU_SCHEDULING_ALGORITHMS
                     end = time + 1;
                     a[smallest].exit_time = end;
                     a[smallest].turnaround_time = end - a[smallest].arrival_time;
+
+                    //sortBurstTime(a, n, x);
                 }
             }
 
@@ -483,7 +521,7 @@ namespace CPU_SCHEDULING_ALGORITHMS
                     }
                     else
                     {
-                        if (processGantt[i] != processGantt[i - 1])
+                        if (processGantt[i].id != processGantt[i - 1].id)
                         {
                             drawProcess(processGantt, colorProcess, font, i, i, 20, 50);
                         }
@@ -660,7 +698,7 @@ namespace CPU_SCHEDULING_ALGORITHMS
                 CountTime.Refresh();
             }
         }
-        public void drawProcess(int[] processGantt, RGB[] colorProcess, Font font, int i, int k, int sizex, int sizey)
+        public void drawProcess(Process[] processGantt, RGB[] colorProcess, Font font, int i, int k, int sizex, int sizey)
         {
             TextBox txb = new TextBox();
             txb.Location = new Point(k * 20, 2);
@@ -669,7 +707,7 @@ namespace CPU_SCHEDULING_ALGORITHMS
             txb.Multiline = true;
             txb.BorderStyle = 0;
             txb.Font = font;
-            txb.Text = string.Format("P{0}", processGantt[i] + 1);
+            txb.Text = string.Format(processGantt[i].id);
             txb.Text += "\r\n";
             txb.Text += "\r\n" + i;
             txb.BackColor = System.Drawing.Color.FromArgb(255, colorProcess[i].x, colorProcess[i].y, colorProcess[i].z);
