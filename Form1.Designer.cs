@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.chọnThuậtToánTạiĐâyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Algorithm = new System.Windows.Forms.TextBox();
@@ -62,6 +62,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.RRPanel = new System.Windows.Forms.Panel();
+            this.pRIORITYToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.qInput)).BeginInit();
@@ -82,7 +83,7 @@
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.Algorithm);
-            this.panel2.Location = new System.Drawing.Point(116, 93);
+            this.panel2.Location = new System.Drawing.Point(131, 96);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(163, 42);
@@ -106,7 +107,7 @@
             this.panel1.Controls.Add(this.PreemptiveBtn);
             this.panel1.Controls.Add(this.NonPreemptiveBtn);
             this.panel1.Enabled = false;
-            this.panel1.Location = new System.Drawing.Point(116, 141);
+            this.panel1.Location = new System.Drawing.Point(131, 144);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(163, 76);
@@ -142,7 +143,7 @@
             this.ClearBtn.BackColor = System.Drawing.Color.Red;
             this.ClearBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClearBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClearBtn.Location = new System.Drawing.Point(196, 259);
+            this.ClearBtn.Location = new System.Drawing.Point(211, 262);
             this.ClearBtn.Margin = new System.Windows.Forms.Padding(4);
             this.ClearBtn.Name = "ClearBtn";
             this.ClearBtn.Size = new System.Drawing.Size(84, 52);
@@ -169,7 +170,7 @@
             this.chọnThuậtToánTạiĐâyToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(977, 31);
+            this.menuStrip1.Size = new System.Drawing.Size(1187, 31);
             this.menuStrip1.TabIndex = 51;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -179,7 +180,8 @@
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fCFSToolStripMenuItem,
             this.sJFToolStripMenuItem,
-            this.rOUNDROBINToolStripMenuItem});
+            this.rOUNDROBINToolStripMenuItem,
+            this.pRIORITYToolStripMenuItem});
             this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Black;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -189,21 +191,21 @@
             // fCFSToolStripMenuItem
             // 
             this.fCFSToolStripMenuItem.Name = "fCFSToolStripMenuItem";
-            this.fCFSToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
+            this.fCFSToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.fCFSToolStripMenuItem.Text = "FCFS";
             this.fCFSToolStripMenuItem.Click += new System.EventHandler(this.fCFSToolStripMenuItem_Click);
             // 
             // sJFToolStripMenuItem
             // 
             this.sJFToolStripMenuItem.Name = "sJFToolStripMenuItem";
-            this.sJFToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
+            this.sJFToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.sJFToolStripMenuItem.Text = "SJF";
             this.sJFToolStripMenuItem.Click += new System.EventHandler(this.sJFToolStripMenuItem_Click);
             // 
             // rOUNDROBINToolStripMenuItem
             // 
             this.rOUNDROBINToolStripMenuItem.Name = "rOUNDROBINToolStripMenuItem";
-            this.rOUNDROBINToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
+            this.rOUNDROBINToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.rOUNDROBINToolStripMenuItem.Text = "ROUND - ROBIN";
             this.rOUNDROBINToolStripMenuItem.Click += new System.EventHandler(this.rOUNDROBINToolStripMenuItem_Click);
             // 
@@ -221,7 +223,7 @@
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ReadOnly = true;
             this.txtConsole.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtConsole.Size = new System.Drawing.Size(884, 176);
+            this.txtConsole.Size = new System.Drawing.Size(1094, 176);
             this.txtConsole.TabIndex = 44;
             this.txtConsole.WordWrap = false;
             // 
@@ -268,12 +270,12 @@
             this.GanttChartPanel.Location = new System.Drawing.Point(42, 333);
             this.GanttChartPanel.Margin = new System.Windows.Forms.Padding(4);
             this.GanttChartPanel.Name = "GanttChartPanel";
-            this.GanttChartPanel.Size = new System.Drawing.Size(884, 84);
+            this.GanttChartPanel.Size = new System.Drawing.Size(1094, 84);
             this.GanttChartPanel.TabIndex = 47;
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(768, 143);
+            this.deleteBtn.Location = new System.Drawing.Point(947, 145);
             this.deleteBtn.Margin = new System.Windows.Forms.Padding(4);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(84, 42);
@@ -284,7 +286,7 @@
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(768, 96);
+            this.addBtn.Location = new System.Drawing.Point(947, 98);
             this.addBtn.Margin = new System.Windows.Forms.Padding(4);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(84, 42);
@@ -296,34 +298,34 @@
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.stt,
             this.CotThoiGianDen,
             this.CotThoiGianXuLy,
             this.Priority});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridView1.Location = new System.Drawing.Point(286, 96);
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView1.Location = new System.Drawing.Point(302, 98);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(474, 216);
+            this.dataGridView1.Size = new System.Drawing.Size(637, 216);
             this.dataGridView1.TabIndex = 41;
             // 
             // stt
@@ -369,7 +371,7 @@
             // 
             // RunBtn
             // 
-            this.RunBtn.Location = new System.Drawing.Point(768, 259);
+            this.RunBtn.Location = new System.Drawing.Point(947, 261);
             this.RunBtn.Margin = new System.Windows.Forms.Padding(4);
             this.RunBtn.Name = "RunBtn";
             this.RunBtn.Size = new System.Drawing.Size(84, 52);
@@ -382,7 +384,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(258, 58);
+            this.label1.Location = new System.Drawing.Point(423, 55);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(387, 29);
@@ -402,17 +404,24 @@
             // 
             this.RRPanel.Controls.Add(this.qInput);
             this.RRPanel.Controls.Add(this.label5);
-            this.RRPanel.Location = new System.Drawing.Point(116, 227);
+            this.RRPanel.Location = new System.Drawing.Point(131, 230);
             this.RRPanel.Name = "RRPanel";
             this.RRPanel.Size = new System.Drawing.Size(164, 32);
             this.RRPanel.TabIndex = 53;
             this.RRPanel.Visible = false;
             // 
+            // pRIORITYToolStripMenuItem
+            // 
+            this.pRIORITYToolStripMenuItem.Name = "pRIORITYToolStripMenuItem";
+            this.pRIORITYToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.pRIORITYToolStripMenuItem.Text = "PRIORITY";
+            this.pRIORITYToolStripMenuItem.Click += new System.EventHandler(this.pRIORITYToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(977, 650);
+            this.ClientSize = new System.Drawing.Size(1187, 650);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -430,6 +439,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.RRPanel);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CPU SCHEDULING ALGORITHMS | VĂN PHÁT";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel2.ResumeLayout(false);
@@ -479,6 +489,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CotThoiGianDen;
         private System.Windows.Forms.DataGridViewTextBoxColumn CotThoiGianXuLy;
         private System.Windows.Forms.DataGridViewTextBoxColumn Priority;
+        private System.Windows.Forms.ToolStripMenuItem pRIORITYToolStripMenuItem;
     }
 }
 
