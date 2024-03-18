@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.chọnThuậtToánTạiĐâyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Algorithm = new System.Windows.Forms.TextBox();
@@ -44,6 +44,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.fCFSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sJFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rOUNDROBINToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtConsole = new System.Windows.Forms.TextBox();
             this.CountTime = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -55,6 +56,7 @@
             this.stt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CotThoiGianDen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CotThoiGianXuLy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.RunBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -152,7 +154,7 @@
             // 
             // qInput
             // 
-            this.qInput.Location = new System.Drawing.Point(80, 2);
+            this.qInput.Location = new System.Drawing.Point(69, 3);
             this.qInput.Name = "qInput";
             this.qInput.Size = new System.Drawing.Size(83, 22);
             this.qInput.TabIndex = 35;
@@ -176,7 +178,8 @@
             this.toolStripMenuItem1.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fCFSToolStripMenuItem,
-            this.sJFToolStripMenuItem});
+            this.sJFToolStripMenuItem,
+            this.rOUNDROBINToolStripMenuItem});
             this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Black;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -186,16 +189,23 @@
             // fCFSToolStripMenuItem
             // 
             this.fCFSToolStripMenuItem.Name = "fCFSToolStripMenuItem";
-            this.fCFSToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.fCFSToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
             this.fCFSToolStripMenuItem.Text = "FCFS";
             this.fCFSToolStripMenuItem.Click += new System.EventHandler(this.fCFSToolStripMenuItem_Click);
             // 
             // sJFToolStripMenuItem
             // 
             this.sJFToolStripMenuItem.Name = "sJFToolStripMenuItem";
-            this.sJFToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.sJFToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
             this.sJFToolStripMenuItem.Text = "SJF";
             this.sJFToolStripMenuItem.Click += new System.EventHandler(this.sJFToolStripMenuItem_Click);
+            // 
+            // rOUNDROBINToolStripMenuItem
+            // 
+            this.rOUNDROBINToolStripMenuItem.Name = "rOUNDROBINToolStripMenuItem";
+            this.rOUNDROBINToolStripMenuItem.Size = new System.Drawing.Size(222, 28);
+            this.rOUNDROBINToolStripMenuItem.Text = "ROUND - ROBIN";
+            this.rOUNDROBINToolStripMenuItem.Click += new System.EventHandler(this.rOUNDROBINToolStripMenuItem_Click);
             // 
             // txtConsole
             // 
@@ -286,27 +296,28 @@
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.stt,
             this.CotThoiGianDen,
-            this.CotThoiGianXuLy});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            this.CotThoiGianXuLy,
+            this.Priority});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.Location = new System.Drawing.Point(286, 96);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
@@ -336,6 +347,13 @@
             this.CotThoiGianXuLy.MinimumWidth = 6;
             this.CotThoiGianXuLy.Name = "CotThoiGianXuLy";
             this.CotThoiGianXuLy.Width = 130;
+            // 
+            // Priority
+            // 
+            this.Priority.HeaderText = "Priority";
+            this.Priority.MinimumWidth = 6;
+            this.Priority.Name = "Priority";
+            this.Priority.Width = 125;
             // 
             // label4
             // 
@@ -374,7 +392,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 4);
+            this.label5.Location = new System.Drawing.Point(3, 5);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 16);
             this.label5.TabIndex = 36;
@@ -384,7 +402,7 @@
             // 
             this.RRPanel.Controls.Add(this.qInput);
             this.RRPanel.Controls.Add(this.label5);
-            this.RRPanel.Location = new System.Drawing.Point(116, 220);
+            this.RRPanel.Location = new System.Drawing.Point(116, 227);
             this.RRPanel.Name = "RRPanel";
             this.RRPanel.Size = new System.Drawing.Size(164, 32);
             this.RRPanel.TabIndex = 53;
@@ -456,9 +474,11 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem fCFSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sJFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rOUNDROBINToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn stt;
         private System.Windows.Forms.DataGridViewTextBoxColumn CotThoiGianDen;
         private System.Windows.Forms.DataGridViewTextBoxColumn CotThoiGianXuLy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Priority;
     }
 }
 
