@@ -42,6 +42,8 @@ namespace CPU_SCHEDULING_ALGORITHMS
         }
         //=============================================================================================================================
 
+
+        #region "Event clicked"
         private void fCFSToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Algorithm.Text = "FCFS";
@@ -86,8 +88,7 @@ namespace CPU_SCHEDULING_ALGORITHMS
             {
                 dataGridView1.Columns.Add("Priority", "Priority");
             }
-            RRPanel.Visible = true;
-            RRPanel.Show();
+            RRPanel.Visible = false;
             panel1.Enabled = true;
             Form1_Load(sender, e);
         }
@@ -248,6 +249,8 @@ namespace CPU_SCHEDULING_ALGORITHMS
                 return;
             }
         }
+        #endregion
+
 
         #region "Algorithm"
         public static void swap<T>(ref T a, ref T b)
@@ -421,28 +424,11 @@ namespace CPU_SCHEDULING_ALGORITHMS
         //SRTF
         public void SRTF(Process[] a, int n)
         {
-            Random rand = new Random();
             Process[] processGantt = new Process[100];
-            RGB[] colorStandar = new RGB[100];
-            RGB[] colorProcess = new RGB[100];
-            int xx, yy, zz;
 
             int[] processBurst = new int[100];
             int i, smallest, count = 0, time, end;
             double avg = 0, tt = 0;
-
-            //Define color of Process
-            for (i = 0; i < n; i++)
-            {
-                //Random color
-                xx = rand.Next(70, 255);
-                yy = rand.Next(70, 255);
-                zz = rand.Next(50, 255);
-                //Red - Green - Black
-                colorStandar[i].x = xx;
-                colorStandar[i].y = yy;
-                colorStandar[i].z = zz;
-            }
 
             arrangeArrival(a, n);
             for (i = 0; i < n; i++)
@@ -459,7 +445,6 @@ namespace CPU_SCHEDULING_ALGORITHMS
                     if (a[i].arrival_time <= time && processBurst[i] < processBurst[smallest] && processBurst[i] > 0)
                     {
                         processGantt[time] = a[i];
-                        colorProcess[time] = colorStandar[i];
                         smallest = i;
                     }
                 }
@@ -617,308 +602,80 @@ namespace CPU_SCHEDULING_ALGORITHMS
         //Priority Preemptive
         public void Priority_Preemptive(Process[] a, int n)
         {
-            arrangeforPriority(a, n);
-        }
-        //====================================================
+            Process[] processGantt = new Process[100];
 
-        #endregion
+            int[] processBurst = new int[100];
+            int i, smallest, count = 0, time, end;
+            double avg = 0, tt = 0;
+            int current_priority;
 
-        /*public static void arrangePriority(Process[] a, int n)
-        {
-            for (int i = 1; i < n - 1; i++)
+            arrangeArrival(a, n);
+            for (i = 0; i < n; i++)
+                processBurst[i] = a[i].burst_time;
+
+            //------------------------------------------
+            //Calulating..
+            processBurst[n + 1] = 9999; //Declare Max
+            for (time = 0; count != n; time++)
             {
-                for (int j = i + 1; j < n; j++)
+                smallest = n + 1;
+                current_priority = 9999;
+                for (i = 0; i < n; i++)
                 {
-                    if (a[i].priority > a[j].priority)
+                    if (current_priority > a[i].priority && a[i].priority > 0)
                     {
-                        swap(ref a[i], ref a[j]);
+                        current_priority = a[i].priority;
                     }
                 }
-            }
-        }
-        public void Priority_NonPreemptive(Process[] a, int n)
-        {
-            Random rand = new Random();
-            RGB[] colorProcess = new RGB[100];
-            int xx, yy, zz, i;
 
-            arrangePriority(a, n);
-            // waiting time for first process is 0
-            a[0].service_time = a[0].arrival_time;
-            a[0].waiting_time = 0;
-            // calculating waiting time
-            for (i = 1; i < n; i++)
-            {
-                a[i].service_time = a[i - 1].service_time + a[i - 1].burst_time;
-                a[i].waiting_time = a[i].service_time - a[i].arrival_time;
-                if (a[i].waiting_time < 0)
+                for (i = 0; i < n; i++)
                 {
-                    a[i].waiting_time = 0;
+                    if (a[i].arrival_time <= time && a[i].priority == current_priority && a[i].priority > 0 && processBurst[i] < processBurst[smallest] && processBurst[i] > 0)
+                    {
+                        processGantt[time] = a[i];
+                        smallest = i;
+                    }
                 }
-            }
-            // calculating turnaround time 
-            for (i = 0; i < n; i++)
-            {
-                a[i].turnaround_time = a[i].burst_time + a[i].waiting_time;
-            }
-
-            for (i = 0; i < n; i++)
-            {
-                //Random color 
-                xx = rand.Next(50, 255);
-                yy = rand.Next(50, 255);
-                zz = rand.Next(50, 255);
-
-                colorProcess[i].x = xx;
-                colorProcess[i].y = yy;
-                colorProcess[i].z = zz;
-            }
-
-            int count = 0, remain = 0;
-            Font font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular);
-            for (i = 0; i < n; i++)
-            {
-
-                TextBox txb1 = new TextBox();
-                if (a[i].burst_time == 1)
+                processBurst[smallest]--;
+                if (processBurst[smallest] == 0)
                 {
-                    txb1.Location = new Point(count * 20, 2);
-                    txb1.Multiline = true;
-                    txb1.Font = font;
-                    txb1.Text = " " + a[i].id;
-                    txb1.Text += "\r\n";
-                    txb1.Text += "\r\n" + count;
-                    txb1.BorderStyle = 0;
-                    txb1.BackColor = System.Drawing.Color.FromArgb(255, colorProcess[i].x, colorProcess[i].y, colorProcess[i].z);
-                    txb1.AutoSize = false;
-                    txb1.ReadOnly = true;
-                    txb1.Margin = new Padding(0, 0, 0, 0);
-                    txb1.Size = new Size(19, 50);
-                    GanttChartPanel.Controls.Add(txb1);
                     count++;
+                    a[smallest].priority = 0;
+                    end = time + 1;
+                    a[smallest].exit_time = end;
+                    a[smallest].turnaround_time = end - a[smallest].arrival_time;
                 }
-                else
-                {
-                    remain = a[i].burst_time;
-                    txb1.Location = new Point(count * 20, 2);
-                    txb1.Multiline = true;
-                    txb1.Font = font;
-                    txb1.Text = " " + a[i].id;
-                    txb1.Text += "\r\n";
-                    txb1.Text += "\r\n" + count;
-                    txb1.BorderStyle = 0;
-                    txb1.BackColor = System.Drawing.Color.FromArgb(255, colorProcess[i].x, colorProcess[i].y, colorProcess[i].z);
-                    txb1.AutoSize = false;
-                    txb1.ReadOnly = true;
-                    txb1.Margin = new Padding(0, 0, 0, 0);
-                    txb1.Size = new Size(20, 50);
-                    GanttChartPanel.Controls.Add(txb1);
-                    count++;
-                    remain--;
-                }
-                while (remain != 0)
-                {
-                    if (remain == 1)
-                    {
-                        TextBox txb = new TextBox();
-                        txb.Location = new Point(count * 20, 2);
-                        txb.Multiline = true;
-                        txb.Font = font;
-                        txb.Text = " ";
-                        txb.BorderStyle = 0;
-                        txb.BackColor = System.Drawing.Color.FromArgb(255, colorProcess[i].x, colorProcess[i].y, colorProcess[i].z);
-                        txb.AutoSize = false;
-                        txb.ReadOnly = true;
-                        txb.Margin = new Padding(0, 0, 0, 0);
-                        txb.Size = new Size(19, 50);
-                        GanttChartPanel.Controls.Add(txb);
-                        count++;
-                        remain--;
-                    }
-                    else
-                    {
-                        TextBox txb = new TextBox();
-                        txb.Location = new Point(count * 20, 2);
-                        txb.Multiline = true;
-                        txb.Font = font;
-                        txb.Text = " ";
-                        txb.BorderStyle = 0;
-                        txb.BackColor = System.Drawing.Color.FromArgb(255, colorProcess[i].x, colorProcess[i].y, colorProcess[i].z);
-                        txb.AutoSize = false;
-                        txb.ReadOnly = true;
-                        txb.Margin = new Padding(0, 0, 0, 0);
-                        txb.Size = new Size(20, 50);
-                        GanttChartPanel.Controls.Add(txb);
-                        count++;
-                        remain--;
-                    }
-                    //Count time                
-                    CountTime.Text = "" + count;
-                    CountTime.Refresh();
-                }
-                //Count time                
-                CountTime.Text = "" + count;
-                CountTime.Refresh();
             }
 
-            sortPID(a, n);
+            for (i = 0; i < n; i++)
+            {
+                a[i].waiting_time = a[i].turnaround_time - a[i].burst_time;
+            }
+
+            for (i = 0; i < n; i++)
+            {
+                avg = avg + a[i].waiting_time;
+                tt = tt + a[i].turnaround_time;
+            }
+
+            drawProcess(processGantt, n, time);
+
             txtConsole.AppendText(Environment.NewLine);
             Console.Write("Process ID\tWaiting Time\tTurnaround Time\n");
             for (i = 0; i < n; i++)
             {
                 txtConsole.AppendText(Environment.NewLine);
-                Console.Write("{0}\t\t{1}\t\t{2}", a[i].id, a[i].waiting_time, a[i].turnaround_time); ;
+                Console.Write("{0}\t\t{1}\t\t{2}", a[i].id, a[i].waiting_time, a[i].turnaround_time);
             }
             txtConsole.AppendText(Environment.NewLine);
             Console.Write("\nAverage waiting time: {0}", averageWaitingTime(a, n));
+
         }
-        private void Priority_Preemptive(Process[] a, int n)
-        {
-            int i, smallest, count = 0, time, end;
-            int[] x = new int[100];
-            int[] y = new int[100];
+        //====================================================
 
-            Random rand = new Random();
-            int[] processGantt = new int[100];
-            RGB[] colorStandar = new RGB[100];
-            RGB[] colorProcess = new RGB[100];
-            int xx, yy, zz;
-
-            for (i = 0; i < n; i++)
-            {
-                x[i] = a[i].burst_time;
-                y[i] = a[i].priority;
-            }
-
-            //Define color of Process
-            for (i = 0; i < n; i++)
-            {
-                //Random color
-                xx = rand.Next(70, 255);
-                yy = rand.Next(70, 255);
-                zz = rand.Next(50, 255);
-                //Red - Green - Black
-                colorStandar[i].x = xx;
-                colorStandar[i].y = yy;
-                colorStandar[i].z = zz;
-            }
+        #endregion
 
 
-            //-------------------------
-            //Declare max
-            x[9] = 1000;
-            y[9] = 10;
-
-            for (time = 0; count != n; time++)
-            {
-                smallest = 9;
-
-                for (i = 0; i < n; i++)
-                {
-                    if (a[i].arrival_time <= time && y[i] < y[smallest] && x[i] > 0)
-                    {
-                        smallest = i;
-                        processGantt[time] = i;
-                        colorProcess[time] = colorStandar[i];
-                    }
-                }
-                x[smallest]--;
-                if (x[smallest] == 0)//Process already done
-                {
-                    count++;
-
-                    end = time + 1;
-                    a[smallest].exit_time = end;
-                    a[smallest].turnaround_time = end - a[smallest].arrival_time;
-                }
-
-                for (i = 0; i < n; i++)
-                {
-                    a[i].waiting_time = a[i].turnaround_time - a[i].burst_time;
-                }
-            }
-
-
-            //---------------------------
-            //Drawing...
-            label2.Visible = true;
-            CountTime.Visible = true;
-            count = 0;
-            Font font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular);
-
-            for (i = 0; i <= time; i++)
-            {
-
-                if (i == time)
-                {
-                    TextBox txb = new TextBox();
-                    txb.Location = new Point(i * 20, 2);
-                    txb.Multiline = true;
-                    txb.Font = font;
-                    txb.Text = string.Format(" ");
-                    txb.Text += "\r\n";
-                    txb.Text += "\r\n" + i;
-                    txb.BorderStyle = 0;
-                    txb.BackColor = System.Drawing.Color.FromArgb(255, 60, 90, 190);
-                    txb.AutoSize = false;
-                    txb.ReadOnly = true;
-                    txb.Margin = new Padding(0, 0, 0, 0);
-                    txb.Size = new Size(15, 50);
-                    GanttChartPanel.Controls.Add(txb);
-                }
-                else
-                {
-                    if (i == 0)
-                    {
-                        drawProcess(processGantt, colorProcess, font, i, i, 20, 50);
-                    }
-                    else
-                    {
-                        if (processGantt[i] != processGantt[i - 1])
-                        {
-                            drawProcess(processGantt, colorProcess, font, i, i, 20, 50);
-                        }
-                        else
-                        {
-                            TextBox txb = new TextBox();
-                            txb.Location = new Point(i * 20, 2);
-                            txb.Multiline = true;
-                            txb.Font = font;
-                            txb.Text = string.Format(" ");
-                            txb.BorderStyle = 0;
-                            txb.BackColor = System.Drawing.Color.FromArgb(255, colorProcess[i].x, colorProcess[i].y, colorProcess[i].z);
-                            txb.AutoSize = false;
-                            txb.ReadOnly = true;
-                            txb.Margin = new Padding(0, 0, 0, 0);
-                            txb.Size = new Size(20, 50);
-                            GanttChartPanel.Controls.Add(txb);
-                        }
-                    }
-                }
-
-                //Count time                
-                CountTime.Text = "" + i;
-                CountTime.Refresh();
-
-            }
-            //Show result
-            float S_wait = 0, S_turnarround = 0;
-            txtConsole.AppendText(Environment.NewLine);
-            Console.Write("Process ID\tWaiting Time\tTunarround Time");
-            for (i = 0; i < n; i++)
-            {
-                txtConsole.AppendText(Environment.NewLine);
-                //Console.Write("   {0}\t    {1,10}\t\t{2,-10}\t   {3,-20}", a[i].id, a[i].arrival_time, a[i].burst_time, a[i].priority);
-                Console.Write(" {0}\t\t", a[i].id);
-                Console.Write(" {0}\t\t{1}", a[i].waiting_time, a[i].turnaround_time);
-                S_wait += (float)a[i].waiting_time;
-                S_turnarround += (float)a[i].turnaround_time;
-            }
-            txtConsole.AppendText(Environment.NewLine);
-            Console.Write("Average waiting time: {0}", S_wait / n);
-            txtConsole.AppendText(Environment.NewLine);
-            Console.Write("Average turnarround time: {0}", S_turnarround / n);
-        }*/
 
         public void drawProcess(Process[] processGantt, int n, int time)
         {
@@ -980,8 +737,6 @@ namespace CPU_SCHEDULING_ALGORITHMS
                 CountTime.Refresh();
             }
         }
-
-        
     }
 }
 //End~~~
