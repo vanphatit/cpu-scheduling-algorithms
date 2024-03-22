@@ -45,6 +45,7 @@
             this.fCFSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sJFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rOUNDROBINToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pRIORITYToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtConsole = new System.Windows.Forms.TextBox();
             this.CountTime = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -62,7 +63,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.RRPanel = new System.Windows.Forms.Panel();
-            this.pRIORITYToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pRIORITYWITHRRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.qInput)).BeginInit();
@@ -181,7 +182,8 @@
             this.fCFSToolStripMenuItem,
             this.sJFToolStripMenuItem,
             this.rOUNDROBINToolStripMenuItem,
-            this.pRIORITYToolStripMenuItem});
+            this.pRIORITYToolStripMenuItem,
+            this.pRIORITYWITHRRToolStripMenuItem});
             this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Black;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -191,23 +193,30 @@
             // fCFSToolStripMenuItem
             // 
             this.fCFSToolStripMenuItem.Name = "fCFSToolStripMenuItem";
-            this.fCFSToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.fCFSToolStripMenuItem.Size = new System.Drawing.Size(237, 28);
             this.fCFSToolStripMenuItem.Text = "FCFS";
             this.fCFSToolStripMenuItem.Click += new System.EventHandler(this.fCFSToolStripMenuItem_Click);
             // 
             // sJFToolStripMenuItem
             // 
             this.sJFToolStripMenuItem.Name = "sJFToolStripMenuItem";
-            this.sJFToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.sJFToolStripMenuItem.Size = new System.Drawing.Size(237, 28);
             this.sJFToolStripMenuItem.Text = "SJF";
             this.sJFToolStripMenuItem.Click += new System.EventHandler(this.sJFToolStripMenuItem_Click);
             // 
             // rOUNDROBINToolStripMenuItem
             // 
             this.rOUNDROBINToolStripMenuItem.Name = "rOUNDROBINToolStripMenuItem";
-            this.rOUNDROBINToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.rOUNDROBINToolStripMenuItem.Size = new System.Drawing.Size(237, 28);
             this.rOUNDROBINToolStripMenuItem.Text = "ROUND - ROBIN";
             this.rOUNDROBINToolStripMenuItem.Click += new System.EventHandler(this.rOUNDROBINToolStripMenuItem_Click);
+            // 
+            // pRIORITYToolStripMenuItem
+            // 
+            this.pRIORITYToolStripMenuItem.Name = "pRIORITYToolStripMenuItem";
+            this.pRIORITYToolStripMenuItem.Size = new System.Drawing.Size(237, 28);
+            this.pRIORITYToolStripMenuItem.Text = "PRIORITY";
+            this.pRIORITYToolStripMenuItem.Click += new System.EventHandler(this.pRIORITYToolStripMenuItem_Click);
             // 
             // txtConsole
             // 
@@ -410,12 +419,12 @@
             this.RRPanel.TabIndex = 53;
             this.RRPanel.Visible = false;
             // 
-            // pRIORITYToolStripMenuItem
+            // pRIORITYWITHRRToolStripMenuItem
             // 
-            this.pRIORITYToolStripMenuItem.Name = "pRIORITYToolStripMenuItem";
-            this.pRIORITYToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
-            this.pRIORITYToolStripMenuItem.Text = "PRIORITY";
-            this.pRIORITYToolStripMenuItem.Click += new System.EventHandler(this.pRIORITYToolStripMenuItem_Click);
+            this.pRIORITYWITHRRToolStripMenuItem.Name = "pRIORITYWITHRRToolStripMenuItem";
+            this.pRIORITYWITHRRToolStripMenuItem.Size = new System.Drawing.Size(237, 28);
+            this.pRIORITYWITHRRToolStripMenuItem.Text = "PRIORITY WITH RR";
+            this.pRIORITYWITHRRToolStripMenuItem.Click += new System.EventHandler(this.pRIORITYWITHRRToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -490,6 +499,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CotThoiGianXuLy;
         private System.Windows.Forms.DataGridViewTextBoxColumn Priority;
         private System.Windows.Forms.ToolStripMenuItem pRIORITYToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pRIORITYWITHRRToolStripMenuItem;
     }
 }
 

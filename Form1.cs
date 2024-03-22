@@ -93,6 +93,19 @@ namespace CPU_SCHEDULING_ALGORITHMS
             Form1_Load(sender, e);
         }
 
+        private void pRIORITYWITHRRToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Algorithm.Text = "Priority with RR";
+            if (dataGridView1.Columns["Priority"] == null)
+            {
+                dataGridView1.Columns.Add("Priority", "Priority");
+            }
+            RRPanel.Visible = true;
+            RRPanel.Show();
+            panel1.Enabled = false;
+            Form1_Load(sender, e);
+        }
+
         private void GanttChart(Process[] a, int n, int choose)
         {
             CountTime.Text = "" + 0;
@@ -120,6 +133,9 @@ namespace CPU_SCHEDULING_ALGORITHMS
                     break;
                 case 5://Priority Preemptive
                     Priority_Preemptive(a, n);
+                    break;
+                case 6://Priority Preemptive
+                    Priority_RR(a, n);
                     break;
             }
         }
@@ -182,6 +198,16 @@ namespace CPU_SCHEDULING_ALGORITHMS
                     flag = 5;
                     Console.Write("Priority preemptive");
                 }
+            }
+            if (Algorithm.Text == "Priority with RR")
+            {
+                flag = 6;
+                if (qInput.Value <= 0)
+                {
+                    MessageBox.Show("Quantum phải lớn hơn 0!!!!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button2, MessageBoxOptions.ServiceNotification);
+                    return;
+                }
+                Console.Write("Priority with RoundRobin");
             }
 
             //Take data from GridView
@@ -278,13 +304,10 @@ namespace CPU_SCHEDULING_ALGORITHMS
             {
                 for (int j = i + 1; j < n; j++)
                 {
-                    if (a[i].priority > a[j].priority && a[i].arrival_time > a[i].arrival_time)
+                    if (a[i].priority >= a[j].priority && a[i].arrival_time >= a[i].arrival_time)
                     {
-                        swap(ref a[i], ref a[j]);
-                    }
-                    else if (a[i].priority == a[j].priority && a[i].arrival_time > a[j].arrival_time)
-                    {
-                        swap(ref a[i], ref a[j]);
+                        if(a[i].priority != a[j].priority || a[i].arrival_time != a[i].arrival_time)
+                            swap(ref a[i], ref a[j]);
                     }
                 }
             }
@@ -491,7 +514,6 @@ namespace CPU_SCHEDULING_ALGORITHMS
             Process[] processGantt = new Process[100];
 
             int time = 0;
-            double avg = 0, tt = 0;
 
             //---------------------------
             // sort arrvial time
@@ -663,6 +685,78 @@ namespace CPU_SCHEDULING_ALGORITHMS
             txtConsole.AppendText(Environment.NewLine);
             Console.Write("Process ID\tWaiting Time\tTurnaround Time\n");
             for (i = 0; i < n; i++)
+            {
+                txtConsole.AppendText(Environment.NewLine);
+                Console.Write("{0}\t\t{1}\t\t{2}", a[i].id, a[i].waiting_time, a[i].turnaround_time);
+            }
+            txtConsole.AppendText(Environment.NewLine);
+            Console.Write("\nAverage waiting time: {0}", averageWaitingTime(a, n));
+
+        }
+        //====================================================
+
+        //Priority with RR
+        public void Priority_RR(Process[] a, int n)
+        {
+            int quantum = (int)qInput.Value;
+            Process[] processGantt = new Process[100];
+
+            int time = 0;
+
+            //---------------------------
+            // sort arrvial time
+            arrangeforPriority(a, n);
+            //---------------------------
+
+            //Calulating...
+            LinkedList<Process> list = new LinkedList<Process>();//Sử dụng giống Queue :V
+            for (int i = 0; i < n; i++)
+            {
+                list.AddLast(a[i]);
+            }
+
+            while (list.Count() > 0)
+            {
+                Process current = list.First();//check first position
+
+                if (current.remaining_time > quantum)
+                {
+                    for (int i = 0; i < quantum; i++)
+                    {
+                        processGantt[time] = current;
+                        time++;
+                        current.remaining_time--;
+                    }
+                    list.RemoveFirst();
+                    if (list.First.Value.priority <= current.priority)
+                        list.AddAfter(list.First, current);
+                    else
+                        list.AddBefore(list.First, current);
+                }
+                else
+                {
+                    int i;
+                    for (i = 0; i < current.remaining_time; i++)
+                    {
+                        processGantt[time] = current;
+                        time++;
+                    }
+                    list.RemoveFirst();
+                    current.remaining_time = 0;
+                }
+                if (current.remaining_time == 0)
+                {
+                    a[current.i].exit_time = time;
+                    a[current.i].turnaround_time = a[current.i].exit_time - a[current.i].arrival_time;
+                    a[current.i].waiting_time = a[current.i].turnaround_time - a[current.i].burst_time;
+                }
+            }
+
+            drawProcess(processGantt, n, time);
+
+            txtConsole.AppendText(Environment.NewLine);
+            Console.Write("Process ID\tWaiting Time\tTurnaround Time\n");
+            for (int i = 0; i < n; i++)
             {
                 txtConsole.AppendText(Environment.NewLine);
                 Console.Write("{0}\t\t{1}\t\t{2}", a[i].id, a[i].waiting_time, a[i].turnaround_time);
